@@ -10,8 +10,8 @@
 #define FIREBASE_AUTH ""  // Database secret atau empty string untuk rules "public"
 
 // ==================== FIREBASE PATHS ====================
-// Root group di Realtime Database
-#define FB_ROOT "/ESP main"
+// Root group di Realtime Database (hindari spasi untuk mencegah 400 Bad Request)
+#define FB_ROOT "/ESP_main"
 // Definisikan path untuk data di Realtime Database di bawah root
 #define FB_PATH_ENVIRONMENT FB_ROOT "/sensors/environment"
 #define FB_PATH_SOIL        FB_ROOT "/sensors/soil"

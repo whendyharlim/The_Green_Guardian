@@ -19,9 +19,19 @@ bool initFirebase(const char* host, const char* auth) {
     return false;
   }
 
+  // Sanitize host: ensure https:// prefix and remove trailing slash
+  String dbUrl = String(host);
+  dbUrl.trim();
+  if (!dbUrl.startsWith("http://") && !dbUrl.startsWith("https://")) {
+    dbUrl = String("https://") + dbUrl;
+  }
+  while (dbUrl.endsWith("/") || dbUrl.endsWith(" ")) {
+    dbUrl.remove(dbUrl.length() - 1);
+  }
+
   // Konfigurasi Firebase
   firebaseConfig.api_key = "";  // Kosong jika menggunakan database secret
-  firebaseConfig.database_url = host;
+  firebaseConfig.database_url = dbUrl.c_str();
   
   // Jika menggunakan auth token (database secret)
   if (strlen(auth) > 0) {
@@ -40,8 +50,10 @@ bool initFirebase(const char* host, const char* auth) {
   
   firebaseInitialized = true;
   Serial.println("✓ Firebase initialized!");
-  Serial.print("  Host: ");
-  Serial.println(host);
+  Serial.print("  Database URL: ");
+  Serial.println(firebaseConfig.database_url.c_str());
+  Serial.print("  Auth token length: ");
+  Serial.println(strlen(auth));
   
   return true;
 }
