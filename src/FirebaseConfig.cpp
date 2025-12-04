@@ -196,7 +196,7 @@ bool sendAllSensorData(const void* envData, const void* npkData) {
   root.set("device", deviceJson);
   
   // Kirim semua data
-  if (Firebase.RTDB.setJSON(&firebaseData, "/sensors", &root)) {
+  if (Firebase.RTDB.setJSON(&firebaseData, FB_ROOT "/sensors", &root)) {
     Serial.println("✓ All sensor data sent to Firebase");
     return true;
   } else {

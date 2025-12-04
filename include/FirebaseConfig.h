@@ -10,11 +10,13 @@
 #define FIREBASE_AUTH ""  // Database secret atau empty string untuk rules "public"
 
 // ==================== FIREBASE PATHS ====================
-// Definisikan path untuk data di Realtime Database
-#define FB_PATH_ENVIRONMENT "/sensors/environment"
-#define FB_PATH_SOIL "/sensors/soil"
-#define FB_PATH_DEVICE_STATUS "/device/status"
-#define FB_PATH_TIMESTAMP "/device/lastUpdate"
+// Root group di Realtime Database
+#define FB_ROOT "/ESP main"
+// Definisikan path untuk data di Realtime Database di bawah root
+#define FB_PATH_ENVIRONMENT FB_ROOT "/sensors/environment"
+#define FB_PATH_SOIL        FB_ROOT "/sensors/soil"
+#define FB_PATH_DEVICE_STATUS FB_ROOT "/device/status"
+#define FB_PATH_TIMESTAMP   FB_ROOT "/device/lastUpdate"
 
 // ==================== FIREBASE OBJECTS ====================
 extern FirebaseData firebaseData;
